@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-=r98c10sbh)u34oihxjvxnz*-_=*qpzk5mla@qf!)umj_t@ty+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
 
 
 # settings.py
@@ -51,17 +50,20 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # <-- must be at the very top after SecurityMiddleware
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'Pos_Main_App.middleware.SlackErrorMiddleware'
-,
+    'Pos_Main_App.middleware.SlackErrorMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True 
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
 
 ROOT_URLCONF = 'Pos_Restraunt_Pro.urls'
 
